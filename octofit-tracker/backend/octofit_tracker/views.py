@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, LeaderboardSerializer, WorkoutSerializer
 from .models import User, Team, Activity, Leaderboard, Workout
+from rest_framework_mongoengine.viewsets import ModelViewSet as DocumentViewSet
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -14,22 +15,22 @@ def api_root(request, format=None):
         'workouts': 'http://localhost:8000/api/workouts/',
     })
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+class UserViewSet(DocumentViewSet):
+    queryset = User.objects
     serializer_class = UserSerializer
 
-class TeamViewSet(viewsets.ModelViewSet):
-    queryset = Team.objects.all()
+class TeamViewSet(DocumentViewSet):
+    queryset = Team.objects
     serializer_class = TeamSerializer
 
-class ActivityViewSet(viewsets.ModelViewSet):
-    queryset = Activity.objects.all()
+class ActivityViewSet(DocumentViewSet):
+    queryset = Activity.objects
     serializer_class = ActivitySerializer
 
-class LeaderboardViewSet(viewsets.ModelViewSet):
-    queryset = Leaderboard.objects.all()
+class LeaderboardViewSet(DocumentViewSet):
+    queryset = Leaderboard.objects
     serializer_class = LeaderboardSerializer
 
-class WorkoutViewSet(viewsets.ModelViewSet):
-    queryset = Workout.objects.all()
+class WorkoutViewSet(DocumentViewSet):
+    queryset = Workout.objects
     serializer_class = WorkoutSerializer
